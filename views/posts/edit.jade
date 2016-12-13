@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  .container
+    if post.id
+      h1.page-header 글수정
+    else
+      h1.page-header 호스팅하기
+
+    form(action = (post.id) ? "/posts/#{post.id}?_method=PUT" : "/posts", method='POST')
+      .form-group
+        label(for='title') 제목
+        input.form-control(type='text', id='title', name='title', placeholder='title', value=post.title)
+        label(for='password') 비밀번호
+        input.form-control(type='password', id='password', name='password', placeholder='Password')
+      .form-group
+        label(for='address') 주소
+        input.form-control(type='text', id='address', name='address', placeholder='Address', value=post.address)
+        label(for='city') 도시
+        input.form-control(type='text', id='city', name='city', placeholder='City', value=post.city)
+        label(for='pay') 숙소 요금
+        input.form-control(type='text', id='pay', name='pay', placeholder='Pay', value=post.pay)
+        label(for='convenience') 편의 시설
+        input.form-control(type='text', id='convenience', name='convenience', placeholder='Convenience', value=post.convenience)
+      .form-group
+        label(for='content') 간단한 설명 & 이용 규칙
+        textarea.form-control(id='content', rows='10', name='content', placeholder='content here')= post.content
+
+      div.form-actions
+        a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
+        | 
+        button.btn.btn-primary(type='submit') 완료
